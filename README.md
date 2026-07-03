@@ -159,3 +159,12 @@ Make sure `OPENAI_API_KEY` and `OPENAI_MODEL` are set. The `conftest.py` creates
 ## Prompt & Problem-Solving Log
 
 See [`PROMPT_AND_LOG.md`](./PROMPT_AND_LOG.md).
+
+## Screen Recording
+
+A terminal recording of the CLI in action is provided in `demo/demo.cast` and can be played with `asciinema play demo/demo.cast`. The recording shows:
+
+1. Creating a new session.
+2. Asking for the current temperature in Shanghai.
+3. Adding a todo item.
+4. Resuming the previous session and asking a follow-up question.
