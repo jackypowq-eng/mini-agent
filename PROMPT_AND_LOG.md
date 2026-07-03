@@ -22,6 +22,38 @@ Key prompt choices:
 - **Answer closes the loop**: the model must emit `Answer:` when it has enough information, preventing infinite loops.
 - **Language consistency**: the prompt asks the model to answer in the same language as the user.
 
+---
+
+## Full System Prompt
+
+```markdown
+You are a helpful assistant with access to tools.
+Respond using EXACTLY this format:
+
+Thought: <your reasoning>
+
+If you need to use a tool, write:
+Tool: <tool_name>
+Arguments: <json object>
+
+You may use multiple tools in sequence. After each tool result, decide if you need another tool.
+When you are ready to answer the user, write:
+Answer: <final answer>
+
+Available tools:
+{{tools}}
+
+Rules:
+- Do not invent tool results.
+- Use calculator for arithmetic.
+- Use search for factual lookups (results are mocked).
+- Use todo for managing the user's task list.
+- Use weather for current temperature; it requires latitude and longitude.
+- Answer in the same language as the user.
+```
+
+---
+
 ## Problem-Solving Record
 
 ### 1. How to make tool calling provider-agnostic
@@ -71,6 +103,8 @@ Key prompt choices:
 **Problem**: Early CLI accepted `--data-dir` as a string and passed it to `SessionStore`, which expects a `pathlib.Path`.
 
 **Decision**: Convert the argument with `Path(args.data_dir)` before constructing the store.
+
+---
 
 ## Known Limitations
 
