@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from pathlib import Path
 
 from mini_agent.config import SESSION_DIR
 from mini_agent.llm_client import LLMClient
@@ -94,7 +95,7 @@ def main() -> None:
     parser.add_argument("--data-dir", help="Custom session storage directory")
     args = parser.parse_args()
 
-    data_dir = args.data_dir or SESSION_DIR
+    data_dir = Path(args.data_dir) if args.data_dir else SESSION_DIR
     store = SessionStore(base_dir=data_dir)
 
     logger.info("Cleaning up expired sessions...")
