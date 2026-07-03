@@ -60,6 +60,18 @@ Key prompt choices:
 
 **Decision**: Parse the expression with `ast.parse(..., mode="eval")` and only allow a whitelist of numeric nodes and operators. Anything else returns an error.
 
+### 7. Passing credentials into the runtime on Windows
+
+**Problem**: The Bash tool on Windows spawns a child process whose environment is not automatically populated from the parent. A simple `set VAR=...` in one command does not persist to the next command.
+
+**Decision**: Use `export VAR=...` on the same command line as the Python invocation so all variables are available in the same shell process. The CLI uses environment variables only; credentials are never written to disk.
+
+### 8. CLI `--data-dir` type bug
+
+**Problem**: Early CLI accepted `--data-dir` as a string and passed it to `SessionStore`, which expects a `pathlib.Path`.
+
+**Decision**: Convert the argument with `Path(args.data_dir)` before constructing the store.
+
 ## Known Limitations
 
 - No true token-count based truncation; only round counting.
